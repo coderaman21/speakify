@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+    <form action="{% url 'signup' %}" method="POST"> {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="username">Username</label>
+                <input required type="text" name='username' class="form-control" id="username" placeholder="type your name here">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="Email">Email</label>
+                <input required type="email" name='email' class="form-control" id="Email" placeholder="Email">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="inputPassword4">Phone Number</label>
+                <input required type="Number" name='phone_no' class="form-control" id="inputPassword4" placeholder="8758347634">
+            </div>    
+            
+    
+            <div class="form-group col-md-3">
+                <label for="country">Country</label>
+                <input name='country' required type="text" class="form-control" id="country">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="gneder">Gender</label>
+                <select name='gender' required id="gneder" class="form-control">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="interests">Interests</label>
+                <select name='interests'  required multiple class="form-control" id="interests">
+                    <option>Sports</option>
+                    <option>Action</option>
+                    <option>Adventure</option>
+                    <option>Travel</option>
+                </select>
+
+            </div>
+            
+            <div class="form-group col-md-12">
+                <label for="Password">Password</label>
+                <input required type="password" name='password' class="form-control" id="Password" placeholder="Password">
+            </div>
+        </div>
+        {% for message in messages %}
+            <div class="error ">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary ">Sign Up</button>
+    </form>
+
+{% endblock %}

@@ -32,8 +32,8 @@ class AccountManager(BaseUserManager):
         return self.create_user(email, password, **other_fields)
 
 class User(AbstractBaseUser,PermissionsMixin):
-    email = models.EmailField(_("email address"), unique=True)
-    phone_no = models.BigIntegerField(unique=True)
+    email = models.EmailField(_("email address"), unique=True,null=True)
+    phone_no = models.BigIntegerField(unique=True,null=True)
     username = models.CharField(max_length=100)
     gender = models.CharField(choices=GENDER, max_length=10)
     country = models.CharField(max_length=50)
