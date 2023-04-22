@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from Usermgmt.serializers import UserSerializer
 from django.contrib.auth.hashers import make_password
+from Home.models import ChatRoom
+from django.db.models import Q
 
 # Create your views here.
 def userLogin(request):
@@ -42,5 +44,10 @@ def userSignup(request):
     return render(request,'signup.html')
 
 def userLogout(request):
+    user = request.user
+    user.is_online = False
+    user.save()
     logout(request)
+    ChatRoom.objects.filter(Q(user1 = user)|Q(user2 = user)).delete()
+
     return redirect('home')
